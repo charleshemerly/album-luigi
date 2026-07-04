@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Álbum do Luigi – Copa 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+
+@page { size: A4 portrait; margin: 5mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:    #4DBFB0;
+  --teal-dk: #2A9B8C;
+  --black:   #111111;
+  --white:   #FFFFFF;
+  --gold:    #D4A020;
+  --gold-lt: #F5D060;
+}
+
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  background: #eef6f6;
+  color: var(--black);
+}
+
+/* ── TELA DE CONTROLE (não imprime) ── */
+.screen-only {
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10pt;
+  font-weight: 700;
+}
+
+.screen-only .logo { color: var(--teal); font-size: 14pt; font-weight: 900; letter-spacing: 1px; }
+.screen-only .tip  { color: rgba(255,255,255,0.5); font-size: 8pt; font-weight: 600; }
+.btn-print {
+  margin-left: auto;
+  background: var(--teal-dk);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10pt;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.btn-print:hover { background: var(--teal); }
+
+.btn-reset {
+  background: #c0392b;
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10pt;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.btn-reset:hover { background: #e74c3c; }
+
+.btn-export {
+  background: #1a7a6e;
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10pt;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.btn-export:hover { background: var(--teal); }
+
+/* ── FOLHA A4 ── */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--white);
+  margin: 10px auto;
+  padding: 5mm;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+@media print {
+  .screen-only { display: none !important; }
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; padding: 0; width: 200mm; }
+  /* esconder bolinhas coletadas na impressão */
+  .n.coletada { display: none !important; }
+}
+
+/* ══════════ HEADER ══════════ */
+.header {
+  display: flex;
+  align-items: stretch;
+  border: 2pt solid var(--black);
+  border-radius: 7px;
+  overflow: hidden;
+  margin-bottom: 3px;
+  height: 15mm;
+}
+
+.hdr-logo {
+  background: var(--black);
+  min-width: 28mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 3px 5px;
+}
+
+.logo-26 { display: flex; gap: 2px; }
+.d2, .d6 {
+  font-size: 20pt; font-weight: 900; color: var(--white);
+  border: 2px solid var(--white); border-radius: 5px;
+  padding: 0 8px; display: flex; align-items: center;
+  justify-content: center; line-height: 1;
+}
+.logo-sub {
+  font-size: 4.5pt; font-weight: 800;
+  color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;
+}
+
+.hdr-mid {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 3px 10px;
+  border-left: 2pt solid var(--black);
+  border-right: 2pt solid var(--black);
+}
+.hdr-eyebrow { font-size: 5.5pt; font-weight: 800; color: var(--teal-dk); letter-spacing: 2px; text-transform: uppercase; }
+.hdr-name { font-size: 17pt; font-weight: 900; color: var(--black); line-height: 1; text-transform: uppercase; }
+.hdr-name span { color: var(--teal-dk); }
+.hdr-sub { font-size: 5.5pt; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; }
+.teal-bar { height: 2px; background: linear-gradient(90deg, var(--teal-dk), var(--teal), transparent); border-radius: 2px; margin-top: 3px; }
+
+.hdr-right {
+  min-width: 24mm; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 3px 6px; gap: 2px;
+}
+.cbox { background: var(--black); color: var(--gold-lt); border-radius: 5px; padding: 1px 8px; text-align: center; }
+.cbox-num { font-size: 15pt; font-weight: 900; line-height: 1; }
+.cbox-lbl { font-size: 4.5pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; }
+.hdr-tip { font-size: 4.5pt; font-weight: 700; color: #999; text-transform: uppercase; text-align: center; line-height: 1.3; }
+
+/* ══════════ CORRENTE ══════════ */
+.chain-bar {
+  height: 6px; margin: 2px 0; overflow: hidden;
+  display: flex; align-items: center; gap: 1.5px;
+}
+.chain-pill {
+  font-size: 3.5pt; font-weight: 900; border-radius: 2px;
+  padding: 0.5px 2.5px; color: var(--white); line-height: 1.4; flex-shrink: 0;
+}
+
+/* ══════════ COLUNAS ══════════ */
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.col-wrap {
+  border: 1.3pt solid var(--black);
+  border-radius: 5px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Separador de grupo ── */
+.grp-sep {
+  display: flex; align-items: center; gap: 4px;
+  background: var(--teal); padding: 2px 5px;
+  border-top: 0.5pt solid var(--teal-dk);
+}
+.grp-sep:first-child { border-top: none; }
+.grp-letter { font-size: 10pt; font-weight: 900; color: var(--black); line-height: 1; width: 11px; }
+.grp-label  { font-size: 5.5pt; font-weight: 800; color: rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── Linha de seleção ── */
+.sel-row {
+  display: flex; align-items: center;
+  padding: 2px 4px; gap: 3px;
+  border-top: 0.5pt solid #ddeef2;
+  min-height: 21px; height: auto;
+}
+.sel-row:nth-child(odd)  { background: #f4fbfc; }
+.sel-row:nth-child(even) { background: var(--white); }
+
+.sel-flag { width: 20px; height: 14px; object-fit: cover; border-radius: 1.5px; flex-shrink: 0; border: 0.5pt solid #ddd; }
+.sel-cod  { font-size: 9.5pt; font-weight: 900; color: var(--teal-dk); width: 28px; flex-shrink: 0; letter-spacing: 0.2px; line-height: 1; }
+.sel-sep  { font-size: 7pt; color: #ccc; flex-shrink: 0; }
+.sel-name { font-size: 9pt; font-weight: 800; text-transform: uppercase; color: var(--black); width: 20mm; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1; }
+
+.sel-nums {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  flex: 1; align-items: center; overflow: visible; min-width: 0;
+}
+
+/* ── BOLINHA ── */
+.n {
+  font-size: 11.5pt;
+  font-weight: 900;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: 2pt solid #1a7a6e;
+  color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  background: #e8f8f6;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  letter-spacing: -1px;
+  transform: scaleX(0.82);
+}
+
+.n:hover {
+  background: #b8ede7;
+  border-color: #1a7a6e;
+  transform: scale(1.18);
+  box-shadow: 0 1px 4px rgba(26,122,110,0.3);
+}
+
+/* Coletada: riscada com ✓ */
+.n.coletada {
+  background: #b0dcd7;
+  border-color: #b0dcd7;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  opacity: 0.5;
+  cursor: pointer;
+  transform: none;
+}
+
+.n.coletada:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.sel-ok { font-size: 7pt; font-weight: 900; color: var(--white); background: var(--teal-dk); border-radius: 3px; padding: 1px 4px; white-space: nowrap; }
+.sel-count { font-size: 8pt; font-weight: 900; color: var(--gold-lt); background: var(--black); border-radius: 3px; padding: 0 4px; flex-shrink: 0; min-width: 18px; text-align: center; line-height: 1.7; margin-left: 1px; }
+
+/* ══════════ ESPECIAIS ══════════ */
+.especiais { border: 1.3pt solid var(--black); border-radius: 5px; overflow: hidden; margin-bottom: 2px; }
+.esp-head { background: var(--black); color: var(--gold-lt); font-size: 7pt; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 7px; display: flex; align-items: center; }
+.esp-head-right { margin-left: auto; font-size: 5.5pt; color: var(--teal); letter-spacing: 2px; font-weight: 800; }
+.esp-body { display: flex; padding: 3px 7px; gap: 14px; background: #f4fbfc; align-items: center; }
+.esp-item { display: flex; align-items: center; gap: 4px; }
+.esp-lbl  { font-size: 7pt; font-weight: 800; text-transform: uppercase; color: var(--teal-dk); white-space: nowrap; }
+.esp-nums { display: flex; gap: 2px; }
+.en {
+  font-size: 9pt; font-weight: 800; padding: 1px 5px; border-radius: 2px;
+  border: 1pt solid var(--gold); color: #7a5200; background: #fffbee;
+  line-height: 1.4; cursor: pointer; transition: all 0.15s;
+  user-select: none;
+}
+.en:hover { background: #ffe8a0; }
+.en.coletada { background: var(--teal-dk); color: white; border-color: var(--teal-dk); opacity: 0.4; }
+
+/* ══════════ FOOTER ══════════ */
+.footer { display: flex; align-items: center; justify-content: space-between; background: var(--black); border-radius: 5px; padding: 2.5px 8px; }
+.ft-left { display: flex; align-items: center; gap: 5px; }
+.ft-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.2pt solid var(--teal); flex-shrink: 0; }
+.ft-tip  { font-size: 6pt; color: rgba(255,255,255,0.55); font-weight: 700; text-transform: uppercase; }
+.ft-center { font-size: 8pt; font-weight: 900; color: var(--white); letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+.ft-26 { background: var(--teal); color: var(--black); font-size: 7.5pt; font-weight: 900; border-radius: 3px; padding: 0.5px 4px; }
+.ft-right { font-size: 6pt; color: rgba(255,255,255,0.35); font-weight: 600; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<!-- ── BARRA DE CONTROLE (só na tela) ── -->
+<div class="screen-only">
+  <span class="logo">⚽ Álbum do Luigi</span>
+  <span class="tip">Clique numa bolinha para marcar como coletada · as alterações são salvas automaticamente</span>
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir</button>
+  <button class="btn-reset" onclick="resetar()">🔄 Resetar tudo</button>
+  <button class="btn-export" onclick="exportarHTML()">🔗 Copiar link para compartilhar</button>
+</div>
+
+<!-- ── FOLHA A4 ── -->
+<div class="page">
+
+  <div class="header">
+    <div class="hdr-logo">
+      <div class="logo-26"><div class="d2">2</div><div class="d6">6</div></div>
+      <div class="logo-sub">FIFA World Cup™</div>
+    </div>
+    <div class="hdr-mid">
+      <div class="hdr-eyebrow">⚽ Official Sticker Collection · 2026</div>
+      <div class="hdr-name">Álbum do <span>Luigi</span></div>
+      <div class="hdr-sub">Figurinhas que ainda faltam colar</div>
+      <div class="teal-bar"></div>
+    </div>
+    <div class="hdr-right">
+      <div class="cbox">
+        <div class="cbox-num" id="total-count">—</div>
+        <div class="cbox-lbl">faltando</div>
+      </div>
+      <div class="hdr-tip">Clique na bolinha<br>ao colar!</div>
+    </div>
+  </div>
+
+  <div class="chain-bar" id="chain-top"></div>
+
+  <div class="columns">
+    <div class="col-wrap" id="col-left"></div>
+    <div class="col-wrap" id="col-right"></div>
+  </div>
+
+  <div class="especiais">
+    <div class="esp-head">⭐ &nbsp;Figurinhas Especiais<span class="esp-head-right">WE ARE 26</span></div>
+    <div class="esp-body">
+      <div class="esp-item">
+        <span class="esp-lbl">🌍 Pág. Inicial (FWC)</span>
+        <div class="esp-nums" id="fwc-sp"></div>
+      </div>
+      <div class="esp-item">
+        <span class="esp-lbl">🏆 FIFA WC History</span>
+        <div class="esp-nums" id="hist-sp"></div>
+      </div>
+      <div class="esp-item">
+        <span class="esp-lbl">🥤 Coca-Cola</span>
+        <div class="esp-nums" id="coca-sp"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chain-bar" id="chain-bot"></div>
+
+  <div class="footer">
+    <div class="ft-left">
+      <div class="ft-dot"></div>
+      <div class="ft-tip">Clique na bolinha ao colar a figurinha · ela some na impressão!</div>
+    </div>
+    <div class="ft-center">WE ARE <span class="ft-26">26</span> ⚽</div>
+    <div class="ft-right">FIFA World Cup™ · <span id="data-hoje"></span></div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+document.getElementById('data-hoje').textContent = new Date().toLocaleDateString('pt-BR');
+
+/* ── CORRENTE ── */
+const chainColors = ['#E63946','#F4A261','#2A9D8F','#457B9D','#6A4C93','#E9C46A','#F28C28','#00B4D8','#C77DFF','#06D6A0','#FFB703','#D62828','#4CC9F0','#F72585','#4361EE','#51CF66','#FF922B','#339AF0'];
+function buildChain(id) {
+  document.getElementById(id).innerHTML = Array.from({length:70},(_,i)=>
+    `<span class="chain-pill" style="background:${chainColors[i%chainColors.length]}">26</span>`).join('');
+}
+buildChain('chain-top'); buildChain('chain-bot');
+
+/* ── DADOS MASTER ── */
+const grupos = {
+  A:['MEX','RSA','KOR','CZE'], B:['CAN','BIH','QAT','SUI'],
+  C:['BRA','MAR','HAI','SCO'], D:['USA','PAR','AUS','TUR'],
+  E:['GER','CUW','CIV','ECU'], F:['NED','JPN','SWE','TUN'],
+  G:['BEL','EGY','IRN','NZL'], H:['ESP','CPV','KSA','URU'],
+  I:['FRA','SEN','IRQ','NOR'], J:['ARG','ALG','AUT','JOR'],
+  K:['POR','COD','UZB','COL'], L:['ENG','CRO','GHA','PAN']
+};
+
+const nomes = {
+  MEX:'México', RSA:'África do Sul', KOR:'Coreia do Sul', CZE:'Rep. Tcheca',
+  CAN:'Canadá', BIH:'Bósnia', QAT:'Catar', SUI:'Suíça',
+  BRA:'Brasil', MAR:'Marrocos', HAI:'Haiti', SCO:'Escócia',
+  USA:'EUA', PAR:'Paraguai', AUS:'Austrália', TUR:'Turquia',
+  GER:'Alemanha', CUW:'Curaçao', CIV:'C. do Marfim', ECU:'Equador',
+  NED:'Holanda', JPN:'Japão', SWE:'Suécia', TUN:'Tunísia',
+  BEL:'Bélgica', EGY:'Egito', IRN:'Irã', NZL:'N. Zelândia',
+  ESP:'Espanha', CPV:'Cabo Verde', KSA:'Ar. Saudita', URU:'Uruguai',
+  FRA:'França', SEN:'Senegal', IRQ:'Iraque', NOR:'Noruega',
+  ARG:'Argentina', ALG:'Argélia', AUT:'Áustria', JOR:'Jordânia',
+  POR:'Portugal', COD:'Congo RD', UZB:'Uzbequistão', COL:'Colômbia',
+  ENG:'Inglaterra', CRO:'Croácia', GHA:'Gana', PAN:'Panamá'
+};
+
+const flags = {
+  MEX:'mx',RSA:'za',KOR:'kr',CZE:'cz',CAN:'ca',BIH:'ba',QAT:'qa',SUI:'ch',
+  BRA:'br',MAR:'ma',HAI:'ht',SCO:'gb-sct',USA:'us',PAR:'py',AUS:'au',TUR:'tr',
+  GER:'de',CUW:'cw',CIV:'ci',ECU:'ec',NED:'nl',JPN:'jp',SWE:'se',TUN:'tn',
+  BEL:'be',EGY:'eg',IRN:'ir',NZL:'nz',ESP:'es',CPV:'cv',KSA:'sa',URU:'uy',
+  FRA:'fr',SEN:'sn',IRQ:'iq',NOR:'no',ARG:'ar',ALG:'dz',AUT:'at',JOR:'jo',
+  POR:'pt',COD:'cd',UZB:'uz',COL:'co',ENG:'gb-eng',CRO:'hr',GHA:'gh',PAN:'pa'
+};
+
+/* Pendentes MASTER — nunca alterar manualmente, o estado é salvo no localStorage */
+const pendentesBase = {
+  MEX:[4,12,14], RSA:[],
+  KOR:[1,2,5,13,19],
+  CZE:[2,8,11,13,16,17,18,20],
+  CAN:[2,5,9,13,18],
+  BIH:[1,2,3,4,5,7,18,19,20],
+  QAT:[2], SUI:[9,13,17,20],
+  BRA:[19], MAR:[14],
+  HAI:[4,9,13,19], SCO:[],
+  USA:[3,4,5,6,9,11],
+  PAR:[5,9,14,18],
+  AUS:[],
+  TUR:[2,3,6,7,8,12,13,19,20],
+  GER:[5,14], CUW:[1,13,20],
+  CIV:[3,5,14,19,20], ECU:[2],
+  NED:[5,13,18,20],
+  JPN:[8,16],
+  SWE:[1,11,14,15,17,18,19,20],
+  TUN:[3,5,6,9,18,19],
+  BEL:[6,7],
+  EGY:[9,12,14,18],
+  IRN:[10,20], NZL:[2,6,10,12,13],
+  ESP:[2,13],
+  CPV:[2,3,4,8,12,14],
+  KSA:[1,5,8,11],
+  URU:[2,4,6,7,10,11,14],
+  FRA:[], SEN:[1],
+  IRQ:[1,3,4,9,10,12,13,16,17,18,19],
+  NOR:[3,5,13],
+  ARG:[6,8],
+  ALG:[1,2,3,7,11,16,17],
+  AUT:[6,8,9,10,12,13,15,18,20],
+  JOR:[1,13],
+  POR:[5],
+  COD:[1,2,5,7,8,9,10,11,12,17],
+  UZB:[1,4,5,6,7,9,11,15,18,20],
+  COL:[4,16,20],
+  ENG:[1,7,11,13,19,20],
+  CRO:[13,16,20],
+  GHA:[13],
+  PAN:[3,9,10,18,19,20]
+};
+
+const espBase = {
+  fwc: [4,5,6,8],
+  hist: [14],
+  coca: []
+};
+
+/* ── STORAGE via URL hash (funciona em qualquer dispositivo) ── */
+function loadState() {
+  try {
+    const hash = location.hash.slice(1);
+    if (hash) {
+      const decoded = decodeURIComponent(hash);
+      return JSON.parse(atob(decoded));
+    }
+  } catch(e) {}
+  try {
+    const raw = localStorage.getItem('luigi_album_v7');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return { coletadas: {} };
+}
+
+function saveState(state) {
+  try {
+    const encoded = btoa(JSON.stringify(state));
+    history.replaceState(null, null, '#' + encodeURIComponent(encoded));
+  } catch(e) {}
+  try {
+    localStorage.setItem('luigi_album_v7', JSON.stringify(state));
+  } catch(e) {}
+}
+
+function isColetada(state, cod, num) {
+  return state.coletadas[cod] && state.coletadas[cod].includes(String(num));
+}
+
+function toggleColetada(state, cod, num) {
+  if (!state.coletadas[cod]) state.coletadas[cod] = [];
+  const key = String(num);
+  const idx = state.coletadas[cod].indexOf(key);
+  if (idx >= 0) state.coletadas[cod].splice(idx, 1);
+  else state.coletadas[cod].push(key);
+  saveState(state);
+}
+
+function resetar() {
+  if (confirm('Resetar todas as marcações? Isso apaga o progresso salvo.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+
+/* ── CONTADOR ── */
+function atualizarTotal(state) {
+  let total = 0;
+  // países
+  for (const [cod, nums] of Object.entries(pendentesBase)) {
+    for (const n of nums) {
+      if (!isColetada(state, cod, n)) total++;
+    }
+  }
+  // especiais
+  for (const [tipo, nums] of Object.entries(espBase)) {
+    for (const n of nums) {
+      if (!isColetada(state, 'ESP_'+tipo, n)) total++;
+    }
+  }
+  document.getElementById('total-count').textContent = total;
+}
+
+/* ── RENDER ── */
+function renderColuna(containerId, gruposList, state) {
+  const col = document.getElementById(containerId);
+  let rowIdx = 0;
+
+  for (const grp of gruposList) {
+    // Separador
+    const sep = document.createElement('div');
+    sep.className = 'grp-sep';
+    sep.innerHTML = `<span class="grp-letter">${grp}</span><span class="grp-label">Grupo</span>`;
+    col.appendChild(sep);
+
+    for (const cod of grupos[grp]) {
+      const nums = pendentesBase[cod] || [];
+
+      const row = document.createElement('div');
+      row.className = 'sel-row';
+      row.style.background = rowIdx % 2 === 0 ? '#f4fbfc' : '#ffffff';
+      rowIdx++;
+
+      // Conta pendentes reais (não coletadas)
+      const pendentesReais = nums.filter(n => !isColetada(state, cod, n));
+
+      let numsHTML = '';
+      if (nums.length === 0) {
+        numsHTML = `<span class="sel-ok">✓ Completo</span>`;
+      } else {
+        numsHTML = nums.map(n => {
+          const coletada = isColetada(state, cod, n);
+          return `<span class="n${coletada?' coletada':''}" data-cod="${cod}" data-num="${n}" title="Clique para marcar/desmarcar">${coletada ? '✓' : n}</span>`;
+        }).join('');
+      }
+
+      const countHTML = nums.length > 0
+        ? `<span class="sel-count" id="count-${cod}">${pendentesReais.length}</span>`
+        : '';
+
+      row.innerHTML = `
+        <img class="sel-flag" src="https://flagcdn.com/24x18/${flags[cod]||'un'}.png" alt="${cod}">
+        <span class="sel-cod">${cod}</span>
+        <span class="sel-sep">|</span>
+        <span class="sel-name">${nomes[cod]}</span>
+        <div class="sel-nums">${numsHTML}</div>
+        ${countHTML}`;
+
+      col.appendChild(row);
+    }
+  }
+}
+
+function renderEspeciais(state) {
+  function render(id, tipo, arr) {
+    document.getElementById(id).innerHTML = arr.map(n => {
+      const coletada = isColetada(state, 'ESP_'+tipo, n);
+      return `<span class="en${coletada?' coletada':''}" data-tipo="${tipo}" data-num="${n}">${coletada?'✓':n}</span>`;
+    }).join('');
+  }
+  render('fwc-sp',  'fwc',  espBase.fwc);
+  render('hist-sp', 'hist', espBase.hist);
+  render('coca-sp', 'coca', espBase.coca);
+}
+
+/* ── INICIALIZAR ── */
+const state = loadState();
+
+renderColuna('col-left',  ['A','B','C','D','E','F'], state);
+renderColuna('col-right', ['G','H','I','J','K','L'], state);
+renderEspeciais(state);
+atualizarTotal(state);
+
+/* ── EVENTOS DE CLIQUE ── */
+document.addEventListener('click', function(e) {
+  // Bolinhas normais
+  if (e.target.classList.contains('n') && e.target.dataset.cod) {
+    const cod = e.target.dataset.cod;
+    const num = e.target.dataset.num;
+    toggleColetada(state, cod, num);
+
+    const coletada = isColetada(state, cod, num);
+    e.target.classList.toggle('coletada', coletada);
+    e.target.textContent = coletada ? '✓' : num;
+
+    // Atualizar contador da seleção
+    const nums = pendentesBase[cod] || [];
+    const pendentesReais = nums.filter(n => !isColetada(state, cod, n));
+    const countEl = document.getElementById('count-'+cod);
+    if (countEl) countEl.textContent = pendentesReais.length;
+
+    atualizarTotal(state);
+  }
+
+  // Especiais
+  if (e.target.classList.contains('en') && e.target.dataset.tipo) {
+    const tipo = e.target.dataset.tipo;
+    const num  = e.target.dataset.num;
+    toggleColetada(state, 'ESP_'+tipo, num);
+
+    const coletada = isColetada(state, 'ESP_'+tipo, num);
+    e.target.classList.toggle('coletada', coletada);
+    e.target.textContent = coletada ? '✓' : num;
+
+    atualizarTotal(state);
+  }
+});
+
+/* ── COMPARTILHAR LINK ── */
+function exportarHTML() {
+  const state = loadState();
+  const encoded = btoa(JSON.stringify(state));
+  const url = location.href.split('#')[0] + '#' + encodeURIComponent(encoded);
+
+  // Tentar copiar para clipboard
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      alert('✅ Link copiado!\n\nCole no WhatsApp ou em qualquer browser.\nAo abrir, suas marcações estarão salvas.');
+    }).catch(() => {
+      prompt('Copie o link abaixo:', url);
+    });
+  } else {
+    prompt('Copie o link abaixo:', url);
+  }
+}
+</script>
+</body>
+</html>
