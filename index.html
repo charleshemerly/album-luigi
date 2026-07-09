@@ -406,50 +406,58 @@ const flags = {
 
 /* Pendentes MASTER — nunca alterar manualmente, o estado é salvo no localStorage */
 const pendentesBase = {
-  MEX:[12], RSA:[],
-  KOR:[1,5,13],
-  CZE:[2,8,11,13,17,18],
-  CAN:[5,18],
-  BIH:[2,5,20],
-  QAT:[2], SUI:[17,20],
-  BRA:[19], MAR:[14],
-  HAI:[4,9,13,19], SCO:[],
-  USA:[3,4,5,6,9,11],
-  PAR:[5,9,14,18],
+  MEX:[12],
+  RSA:[],
+  KOR:[1, 5],
+  CZE:[2, 8, 13, 17, 18],
+  CAN:[5, 18],
+  BIH:[2, 5],
+  QAT:[2],
+  SUI:[17, 20],
+  BRA:[19],
+  MAR:[14],
+  HAI:[4],
+  SCO:[],
+  USA:[3, 4, 5, 6, 9],
+  PAR:[5, 9],
   AUS:[],
-  TUR:[2,3,7,13,19,20],
-  GER:[5,14], CUW:[1,20],
-  CIV:[3,5,14,19,20], ECU:[2],
-  NED:[5,13,18,20],
-  JPN:[8,16],
-  SWE:[1,11,14,15,17,18,19,20],
-  TUN:[3,9,18,19],
-  BEL:[6,7],
-  EGY:[9,12,14,18],
-  IRN:[10,20], NZL:[2,6,10,12],
-  ESP:[2,13],
-  CPV:[2,3,4,8,12,14],
-  KSA:[1,5,8,11],
+  TUR:[3, 7, 13, 19, 20],
+  GER:[5, 14],
+  CUW:[20],
+  CIV:[3, 5, 14],
+  ECU:[2],
+  NED:[5, 13, 18, 20],
+  JPN:[8, 16],
+  SWE:[1, 14, 17, 18, 20],
+  TUN:[3, 9, 19],
+  BEL:[6, 7],
+  EGY:[9, 12, 14, 18],
+  IRN:[10, 20],
+  NZL:[2, 6, 10, 12],
+  ESP:[2, 13],
+  CPV:[2, 3, 4, 8, 12, 14],
+  KSA:[1, 5, 8, 11],
   URU:[10],
-  FRA:[], SEN:[],
-  IRQ:[1,10,13,16,19],
-  NOR:[5,13],
+  FRA:[],
+  SEN:[],
+  IRQ:[1, 19],
+  NOR:[13],
   ARG:[],
-  ALG:[1,2,3,7,11,16,17],
-  AUT:[6,8,9,10,12,13,15,18,20],
-  JOR:[1,13],
+  ALG:[2, 3, 7, 11, 16, 17],
+  AUT:[6, 8, 9, 10, 12, 15, 18, 20],
+  JOR:[1],
   POR:[5],
-  COD:[1,5,7,8,11,17],
-  UZB:[5,7,9,11,15],
-  COL:[4,16,20],
-  ENG:[1,7,11,19,20],
-  CRO:[13,16,20],
+  COD:[7, 8, 11, 17],
+  UZB:[5, 11],
+  COL:[4, 16, 20],
+  ENG:[1, 7, 11, 19, 20],
+  CRO:[16, 20],
   GHA:[13],
-  PAN:[3,9,10,18,19,20]
+  PAN:[3, 9, 10, 18, 19, 20]
 };
 
 const espBase = {
-  fwc: [6,8],
+  fwc: [6],
   hist: [],
   coca: []
 };
@@ -464,7 +472,7 @@ function loadState() {
     }
   } catch(e) {}
   try {
-    const raw = localStorage.getItem('luigi_album_v7');
+    const raw = localStorage.getItem('luigi_album_v8');
     if (raw) return JSON.parse(raw);
   } catch(e) {}
   return { coletadas: {} };
@@ -476,7 +484,7 @@ function saveState(state) {
     history.replaceState(null, null, '#' + encodeURIComponent(encoded));
   } catch(e) {}
   try {
-    localStorage.setItem('luigi_album_v7', JSON.stringify(state));
+    localStorage.setItem('luigi_album_v8', JSON.stringify(state));
   } catch(e) {}
 }
 
